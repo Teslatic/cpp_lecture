@@ -7,11 +7,23 @@
 #include "./GameOfLife.h"
 
 int GameOfLife::_numObjects = 0;
+int x = 0;
 // _____________________________________________________________________________
 
 GameOfLife::GameOfLife() {
   _numObjects++;
   printf("Hello, I am the constructor #%d! \n", _numObjects);
+}
+
+// _____________________________________________________________________________
+
+GameOfLife::GameOfLife(int x) {
+  printf("Hello, I was called with argument %d\n", x);
+}
+
+// _____________________________________________________________________________
+GameOfLife::~GameOfLife() {
+  printf("So long!\n");
 }
 // _____________________________________________________________________________
 

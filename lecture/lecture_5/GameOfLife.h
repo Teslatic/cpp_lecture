@@ -13,8 +13,12 @@ class GameOfLife  {
   bool _state[3][3];  //  current state, underscore as member convention
   static int _numObjects;
  public:
-  // constructor
+  // constructors
   GameOfLife();
+  explicit GameOfLife(int x);
+
+  // destructor
+  ~GameOfLife();
 
   void updateState();
   FRIEND_TEST(GameOfLifeTest, updateState);
