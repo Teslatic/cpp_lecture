@@ -1,6 +1,7 @@
-// Copyright 2018, University of Freiburg,
-// Chair of Algorithms and Data Structures.
-// Author: Hendrik Vloet <vloett@informatik.uni-freiburg.de>
+// Copyright 2018, Hendrik Vloet <hendrik.vloet@gmx.de>
+// Using various code snippets kindly provided by
+// http://ad-wiki.informatik.uni-freiburg.de/teaching
+
 
 #include <gtest/gtest.h>
 #include  "./approx_pi.h"

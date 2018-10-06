@@ -1,0 +1,28 @@
+
+
+CXX = g++ -Wall
+HEADERS = $(wildcard *.h)
+
+all: compile checkstyle
+
+BallMain:	BallMain.o Ball.o
+	$(CXX) -o BallMain BallMain.o Ball.o -lncurses
+
+%.o:	%.cpp $(HEADERS)
+	$(CXX) -c $<
+
+xxx:
+	@echo $(wildcard *.cpp)
+
+compile: BallMain
+
+checkstyle:
+	touch .svn
+	cpplint *.cpp *.h
+	rm .svn
+
+clean:
+	rm -rf a.out
+	rm -rf *.o
+	rm -rf *Main
+	rm -rf *Test
