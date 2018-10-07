@@ -11,11 +11,12 @@ int y;
 int processedInput = 0;
 float p = 1.0;
 
-bool currentState[MAX_GRID_SIZE][MAX_GRID_SIZE] = { 0 };
-bool nextState[MAX_GRID_SIZE][MAX_GRID_SIZE] = { 0 };
+// bool currentState[MAX_GRID_SIZE][MAX_GRID_SIZE] = { 0 };
+// bool nextState[MAX_GRID_SIZE][MAX_GRID_SIZE] = { 0 };
 
-bool (*ptrCurrentState)[MAX_GRID_SIZE] = currentState;
-bool (*ptrNextState)[MAX_GRID_SIZE] = nextState;
+bool GameOfLife::_ptrCurrentState = _currentState;
+bool GameOfLife::_ptrNextStat = _NextState;
+// bool (*ptrNextState)[MAX_GRID_SIZE] = nextState;
 
 // __________________________________________________________________________
 void initTerminal() {
