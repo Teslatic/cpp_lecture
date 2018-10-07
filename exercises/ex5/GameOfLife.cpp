@@ -37,6 +37,8 @@ void GameOfLife::initialize()  {
   }
   _ptrCurrentState = _currentState;
   _ptrNextState = _nextState;
+  _rx = 2;
+  _ry = 1;
 }
 
 // _____________________________________________________________________________
@@ -47,11 +49,10 @@ void GameOfLife::showState()  {
     for (int k = 0; k < GRID; k++) {
       if (_ptrCurrentState[k][j] == 1)  {
         population++;
-        attron(A_REVERSE);
-        mvprintw(j, k, " ");
-        attroff(A_REVERSE);
+        drawCell(k, j);
       } else  {
         mvprintw(j, k, " ");
+        // eraseCell(k, j);
       }
     }
   }
@@ -169,6 +170,8 @@ int GameOfLife::processUserInput() {
     return 5;
   case 'r':
     return 6;
+  case 'k':
+    return 7;
   case 27:    // ESC-KEY
     return -1;
   default:
@@ -201,6 +204,9 @@ void GameOfLife::play() {
         if (userInput == 5) {
           constructAcorn(_x, _y);
         }
+        if (userInput == 7) {
+          constructKokGalaxy(_x, _y);
+        }
         if (userInput == -1) {
           break;
         }
@@ -212,8 +218,6 @@ void GameOfLife::play() {
     usleep(10 * 1000);
   }
 }
-
-
 
 // _____________________________________________________________________________
 
@@ -257,3 +261,38 @@ void GameOfLife::constructAcorn(int xG, int yG)  {
   _ptrCurrentState[xG][yG] = 0;
 }
 
+
+// _____________________________________________________________________________
+
+void GameOfLife::constructKokGalaxy(int xG, int yG)  {
+  int const (*ptrGalaxy)[2] = _GALAXY;
+  int markerX = 0;
+  int markerY = 0;
+  for (int i=0; i < 28; i++) {
+    markerX = ptrGalaxy[i][0];
+    markerY = ptrGalaxy[i][1];
+    _ptrCurrentState[xG + markerX][yG + markerY] = 1;
+  }
+  _ptrCurrentState[xG][yG] = 0;
+}
+
+void GameOfLife::drawCell(int x, int y) {
+  attron(A_REVERSE);
+  for (int dx = -_rx; dx <= _rx; dx++)  {
+    for (int dy = -_ry; dy <= _ry; dy++)  {
+      if (dx * dx * _ry * _ry + dy * dy * _rx * _rx < _rx * _rx * _ry * _ry) {
+        mvprintw(y + dy, x + dx, " ");
+      }
+    }
+  }
+  attroff(A_REVERSE);
+}
+void GameOfLife::eraseCell(int x, int y) {
+  for (int dx = -_rx; dx <= _rx; dx++)  {
+    for (int dy = -_ry; dy <= _ry; dy++)  {
+      if (dx * dx * _ry * _ry + dy * dy * _rx * _rx < _rx * _rx * _ry * _ry) {
+        mvprintw(y + dy, x + dx, " ");
+      }
+    }
+  }
+}

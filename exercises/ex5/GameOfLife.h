@@ -7,7 +7,7 @@
 #define GAMEOFLIFE_H_
 
 #include <gtest/gtest.h>
-const int GRID = 200;
+const int GRID = 300;
 
 class GameOfLife  {
  private:
@@ -29,6 +29,8 @@ class GameOfLife  {
   // y coordinate of last mouse click
   int _y;
 
+  int _rx;
+  int _ry;
 
   // glider with relative positions of live cells, courtesy of Axel Lehmann
   // <lehmann@cs.uni-freiburg.de>.
@@ -53,12 +55,25 @@ class GameOfLife  {
                            {1, 0}, {3, 1}, {0, 2}, {1, 2}, {4, 2}, {5, 2}, {6, 2}
   };
 
+  int _GALAXY[28][2] = {{2, 0}, {5, 0}, {7, 0},
+                        {0, 1}, {1, 1}, {3, 1}, {5, 1}, {6, 1}, {7, 1},
+                        {1, 2}, {8, 2},
+                        {0, 3}, {1, 3}, {7, 3},
+                        {1, 5}, {7, 5}, {8, 5},
+                        {0, 6}, {7, 6},
+                        {1, 7}, {2, 7}, {3, 7}, {5, 7}, {7, 7}, {8, 7},
+                        {1, 8}, {3, 8}, {6, 8}};
+
   // counts alive neighbours around one cell
   int aliveNeighbours(int x, int y);
   // initalizes terminal, state arrays and pointer
   void initialize();
   // displays current state in the terminal
   void showState();
+  // draw a cell
+  void drawCell(int x, int y);
+  // erase a cell
+  void eraseCell(int x, int y);
   // calculates the result state
   void updateState();
   FRIEND_TEST(GameOfLifeTest, updateState);
@@ -70,7 +85,8 @@ class GameOfLife  {
   void constructGliderFactory(int x, int y);
   // constructs an acorn at position x,y
   void constructAcorn(int x, int y);
-
+  // construcs Kok's Galaxy
+  void constructKokGalaxy(int x, int y);
  public:
   GameOfLife();  // Constructor
   ~GameOfLife(); // Destructor
